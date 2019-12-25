@@ -13,6 +13,7 @@ func Init() *mux.Router {
 	route := mux.NewRouter()
 	route.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./public"))))
 	route.NotFoundHandler = http.HandlerFunc(notFound)
+
 	route.HandleFunc("/", controllers.Home)
 	route.HandleFunc("/fragrance", controllers.Fragrance)
 	route.HandleFunc("/scent/{scent}", controllers.Scent)

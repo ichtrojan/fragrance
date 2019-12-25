@@ -1,26 +1,13 @@
 package controllers
 
 import (
-	"net/http"
-
 	"github.com/ichtrojan/fragrance/views"
+	"net/http"
 )
 
 var view *views.View
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	// var homeView *views.View
-	// view, err := template.ParseFiles("views/index.html")
-
-	// if err != nil {
-	// 	log.Fatal(nil)
-	// }
-
-	// err = view.Execute(w, nil)
-
-	// if err != nil {
-	// 	log.Fatal(nil)
-	// }
 	view = views.NewView("app", "home")
 	must(view.Render(w, nil))
 }
