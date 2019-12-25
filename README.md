@@ -4,8 +4,6 @@
 
 ### Fragrance 
 * id
-* name
-* slug
 * price
 * category_id
 * scent_id
