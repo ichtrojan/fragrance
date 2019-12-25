@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	err := http.ListenAndServe(":9000", routes.Init())
-
-	if err != nil {
+	if err := http.ListenAndServe(":9000", routes.Init()); err != nil {
 		log.Fatal(err)
 	}
 }
