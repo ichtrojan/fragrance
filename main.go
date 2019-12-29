@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/ichtrojan/fragrance/database"
 	"github.com/ichtrojan/fragrance/routes"
@@ -16,7 +17,13 @@ func main() {
 
 	database.SeedAdmin()
 
-	if err := http.ListenAndServe(":9000", routes.Init()); err != nil {
+	port, exist := os.LookupEnv("PORT")
+
+	if !exist {
+		log.Fatal("PORT not set in .env")
+	}
+
+	if err := http.ListenAndServe(":"+port, routes.Init()); err != nil {
 		log.Fatal(err)
 	}
 }
