@@ -19,6 +19,7 @@ func Init() *mux.Router {
 	route.HandleFunc("/scent/{scent}", controllers.Scent)
 	route.HandleFunc("/perfume/bottle", controllers.Perfume)
 	route.HandleFunc("/checkout", controllers.Checkout)
+	route.HandleFunc("/login", controllers.LoginUser).Methods("POST")
 
 	return route
 }
