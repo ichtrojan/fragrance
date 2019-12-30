@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"github.com/ichtrojan/fragrance/views"
 	"net/http"
+
+	"github.com/ichtrojan/fragrance/views"
 )
 
 var view *views.View
