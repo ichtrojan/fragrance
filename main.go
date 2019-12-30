@@ -17,6 +17,8 @@ func main() {
 
 	database.SeedAdmin()
 
+	database.SeedCategory()
+
 	port, exist := os.LookupEnv("PORT")
 
 	if !exist {
