@@ -10,19 +10,15 @@
             </div>
         </div>
         <div class="fp-main-content">
-            <div>
-                <a href="/scent/feminine"><h4>Feminine Fragrances</h4></a>
-            </div>
-            <div>
-                <a href="/scent/masculine"><h4>Masculine Fragrances</h4></a>
-            </div>
-            <div>
-                <a href="/scent/unisex"><h4>Unisex Fragrances</h4></a>
-            </div>
+            {{range .Categories}}
+                <div style="background-image: url('{{.Image}}')">
+                    <a href="/scent/feminine"><h4>{{.Name}} Fragrances</h4></a>
+                </div>
+            {{end}}
         </div>
     </section>
-{{ end }}}
+{{end}}
 
 {{define "extracss"}}
     .title{ color: #fff !important; }
-{{ end }}
+{{end}}

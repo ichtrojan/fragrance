@@ -1,12 +1,18 @@
 package controllers
 
 import (
+	"github.com/ichtrojan/fragrance/database"
+	"github.com/ichtrojan/fragrance/models"
 	"net/http"
 
 	"github.com/ichtrojan/fragrance/views"
 )
 
 var view *views.View
+
+type CategoriesData struct {
+	Categories []models.Category
+}
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "home")
@@ -15,7 +21,18 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 func Fragrance(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "fragrance")
-	must(view.Render(w, nil))
+
+	db := database.Init()
+
+	var categories []models.Category
+
+	db.Find(&categories)
+
+	data := CategoriesData{
+		Categories: categories,
+	}
+
+	must(view.Render(w, data))
 }
 
 func Scent(w http.ResponseWriter, r *http.Request) {
