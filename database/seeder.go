@@ -1,13 +1,16 @@
 package database
 
 import (
-	"github.com/ichtrojan/fragrance/models"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+
+	"github.com/ichtrojan/fragrance/models"
 )
 
 func SeedAdmin() {
 	db := Init()
+
+	db.DropTable(&models.Admin{})
 
 	db.AutoMigrate(&models.Admin{})
 
