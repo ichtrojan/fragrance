@@ -40,7 +40,7 @@
 
                 <div>
                     <h4>Price</h4>
-                    <h3>$0.00</h3>
+                    <h3>${{.Price}}</h3>
                 </div>
             </div>
         </div>
@@ -48,10 +48,10 @@
         <div class="cp-sidebar">
             <div class="container">
                 <div class="cp-sidebar-content">
-                    <img src="/assets/img/perfume3.png" alt=""/>
+                    <img src="{{.Image}}" alt=""/>
                     <p>
-                        Your new personalized fragrance has a feminine scent with notes of
-                        flowery and ocean scents packaged in a flacon paris grand.
+                        Your new personalized fragrance has a {{.Category}} scent with notes of
+                        {{.Scent}} scents packaged in a {{.Bottle}}.
                     </p>
                     <button class="myos-btn-alternate">Buy Now</button>
                 </div>

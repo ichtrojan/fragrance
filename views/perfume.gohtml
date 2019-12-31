@@ -11,30 +11,14 @@
         </div>
 
         <div class="container pp-grid">
+            {{range .}}
             <div class="sp-grid-content">
-                <a href="/checkout">
-                    <img src="/assets/img/perfume1.png"/>
+                <a href="/{{.Category}}/{{.Scent}}/{{.Slug}}/checkout">
+                    <img src="{{.Image}}"/>
                     <button class="myos-btn-alternate">Choose bottle</button>
                 </a>
             </div>
-            <div class="sp-grid-content">
-                <a href="/checkout">
-                    <img src="/assets/img/perfume2.png"/>
-                    <button class="myos-btn-alternate">Choose bottle</button>
-                </a>
-            </div>
-            <div class="sp-grid-content">
-                <a href="/checkout">
-                    <img src="/assets/img/perfume3.png"/>
-                    <button class="myos-btn-alternate">Choose bottle</button>
-                </a>
-            </div>
-            <div class="sp-grid-content">
-                <a href="/checkout">
-                    <img src="/assets/img/perfume4.png"/>
-                    <button class="myos-btn-alternate">Choose bottle</button>
-                </a>
-            </div>
+            {{end}}
         </div>
     </section>
 {{ end }}}
