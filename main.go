@@ -19,6 +19,10 @@ func main() {
 
 	database.SeedCategory()
 
+	database.SeedScent()
+
+	database.SeedBottle()
+
 	port, exist := os.LookupEnv("PORT")
 
 	if !exist {
