@@ -15,10 +15,10 @@ func Init() *mux.Router {
 	route.NotFoundHandler = http.HandlerFunc(notFound)
 
 	route.HandleFunc("/", controllers.Home)
-	route.HandleFunc("/fragrance", controllers.Fragrance)
-	route.HandleFunc("/scent/{scent}", controllers.Scent)
-	route.HandleFunc("/perfume/bottle", controllers.Perfume)
-	route.HandleFunc("/checkout", controllers.Checkout)
+	route.HandleFunc("/categories", controllers.Category)
+	route.HandleFunc("/{category}", controllers.Scent)
+	route.HandleFunc("/{category}/{scent}", controllers.Perfume)
+	route.HandleFunc("/{category}/{scent}/{bottle}/checkout", controllers.Checkout)
 	route.HandleFunc("/login", controllers.LoginUser).Methods("POST")
 
 	return route
