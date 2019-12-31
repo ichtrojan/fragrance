@@ -53,6 +53,86 @@ func SeedCategory() {
 	}
 }
 
+func SeedScent() {
+	db := Init()
+
+	db.DropTable(&models.Scent{})
+
+	db.AutoMigrate(&models.Scent{})
+
+	scents := []models.Scent{
+		{
+			Name:  "Woodsy",
+			Slug:  "woodsy",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577750699/fragrance/slide1.png",
+			Price: 2.0,
+		},
+		{
+			Name:  "Fruity",
+			Slug:  "fruity",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577750697/fragrance/slide5.png",
+			Price: 4.0,
+		},
+		{
+			Name:  "Floral",
+			Slug:  "floral",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577750698/fragrance/slide2.png",
+			Price: 4.0,
+		},
+		{
+			Name:  "Earthly",
+			Slug:  "earthly",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577750698/fragrance/slide3.png",
+			Price: 2.5,
+		},
+		{
+			Name:  "Oceanic",
+			Slug:  "oceanic",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577750699/fragrance/slide4.png",
+			Price: 3.5,
+		},
+	}
+
+	for _, scent := range scents {
+		db.Create(&scent)
+	}
+}
+
+func SeedBottle() {
+	db := Init()
+
+	db.DropTable(&models.Bottle{})
+
+	db.AutoMigrate(&models.Bottle{})
+
+	bottles := []models.Bottle{
+		{
+			Name:  "Bullet",
+			Slug:  "bullet",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751580/fragrance/perfume4.png",
+		},
+		{
+			Name:  "Vase",
+			Slug:  "vase",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751583/fragrance/perfume3.png",
+		},
+		{
+			Name:  "Mystic",
+			Slug:  "mystic",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751580/fragrance/perfume2.png",
+		},
+		{
+			Name:  "Bold",
+			Slug:  "bold",
+			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751583/fragrance/perfume1.png",
+		},
+	}
+
+	for _, bottle := range bottles {
+		db.Create(&bottle)
+	}
+}
+
 func hashAndSalt(password []byte) string {
 	hash, err := bcrypt.GenerateFromPassword(password, bcrypt.MinCost)
 
