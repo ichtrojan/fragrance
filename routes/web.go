@@ -16,10 +16,11 @@ func Init() *mux.Router {
 
 	route.HandleFunc("/", controllers.Home)
 	route.HandleFunc("/categories", controllers.Category)
+	route.HandleFunc("/login", controllers.Signin).Methods("GET")
+	route.HandleFunc("/login", controllers.LoginUser).Methods("POST")
 	route.HandleFunc("/{category}", controllers.Scent)
 	route.HandleFunc("/{category}/{scent}", controllers.Perfume)
 	route.HandleFunc("/{category}/{scent}/{bottle}/checkout", controllers.Checkout)
-	route.HandleFunc("/login", controllers.LoginUser).Methods("POST")
 
 	return route
 }

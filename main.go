@@ -21,6 +21,8 @@ func main() {
 
 	database.SeedScent()
 
+	database.SeedBottleSizes()
+
 	database.SeedBottle()
 
 	port, exist := os.LookupEnv("PORT")

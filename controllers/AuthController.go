@@ -2,11 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
-	"golang.org/x/crypto/bcrypt"
 	"net/http"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/ichtrojan/fragrance/database"
 	"github.com/ichtrojan/fragrance/models"
+	"github.com/ichtrojan/fragrance/views"
 )
 
 type Response struct {
@@ -48,4 +50,9 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(Response{Message: "login successful"})
 
 	return
+}
+
+func Signin(w http.ResponseWriter, r *http.Request) {
+	view = views.NewView("app", "signin")
+	must(view.Render(w, nil))
 }

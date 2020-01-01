@@ -1,8 +1,9 @@
 package database
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"log"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/ichtrojan/fragrance/models"
 )
@@ -51,6 +52,15 @@ func SeedCategory() {
 	for _, category := range categories {
 		db.Create(&category)
 	}
+}
+
+func SeedBottleSizes() {
+	db := Init()
+
+	db.DropTable(&models.BottleSize{})
+
+	db.AutoMigrate(&models.BottleSize{})
+
 }
 
 func SeedScent() {
@@ -110,21 +120,77 @@ func SeedBottle() {
 			Name:  "Bullet",
 			Slug:  "bullet",
 			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751580/fragrance/perfume4.png",
+			BottleSizes: []models.BottleSize{
+				{
+					Size:  "30 ml",
+					Price: 4.0,
+				},
+				{
+					Size:  "60 ml",
+					Price: 8.0,
+				},
+				{
+					Size:  "90 ml",
+					Price: 12.5,
+				},
+			},
 		},
 		{
 			Name:  "Vase",
 			Slug:  "vase",
 			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751583/fragrance/perfume3.png",
+			BottleSizes: []models.BottleSize{
+				{
+					Size:  "30 ml",
+					Price: 4.0,
+				},
+				{
+					Size:  "60 ml",
+					Price: 8.0,
+				},
+				{
+					Size:  "90 ml",
+					Price: 12.5,
+				},
+			},
 		},
 		{
 			Name:  "Mystic",
 			Slug:  "mystic",
 			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751580/fragrance/perfume2.png",
+			BottleSizes: []models.BottleSize{
+				{
+					Size:  "30 ml",
+					Price: 4.0,
+				},
+				{
+					Size:  "60 ml",
+					Price: 8.0,
+				},
+				{
+					Size:  "90 ml",
+					Price: 12.5,
+				},
+			},
 		},
 		{
 			Name:  "Bold",
 			Slug:  "bold",
 			Image: "https://res.cloudinary.com/ichtrojan/image/upload/v1577751583/fragrance/perfume1.png",
+			BottleSizes: []models.BottleSize{
+				{
+					Size:  "30 ml",
+					Price: 4.0,
+				},
+				{
+					Size:  "60 ml",
+					Price: 8.0,
+				},
+				{
+					Size:  "90 ml",
+					Price: 12.5,
+				},
+			},
 		},
 	}
 

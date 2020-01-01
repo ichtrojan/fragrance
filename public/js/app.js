@@ -47,16 +47,51 @@ $('.pp-grid').slick({
 $('#minus').click(function (e) {
     e.preventDefault()
     let value = $('#amount').val()
+    let price = $('input:radio.sizes:checked').data('price')
+    let single_price = $('#total-price').data('single')
+
+
     if (value != 0) {
         value--
         $('#amount').val(value)
+        var total = (parseFloat(single_price) + parseFloat(price))
+        $('#total-price').data('price', total)
+        $('#total-price').text(total * value)
+
     }
 })
 
 
 $('#plus').click(function (e) {
     e.preventDefault()
+    if ($('input:radio.sizes:checked').val() == null) {
+        alert('select a size first')
+        return
+    }
     let value = $('#amount').val()
+    let price = $('input:radio.sizes:checked').data('price')
+    let single_price = $('#total-price').data('single')
+
+
     value++
     $('#amount').val(value)
+    var total = (parseFloat(single_price) + parseFloat(price))
+    $('#total-price').data('price', total)
+    $('#total-price').text(total * value)
+
+})
+
+$('.back').click(function () {
+    window.history.back()
+})
+
+$('input:radio.sizes').change(function (e) {
+        let price = $(this).data('price')
+        let value = $('#amount').val()
+        let single_price = $('#total-price').data('single')
+
+        var total = (parseFloat(single_price) + parseFloat(price))
+        $('#total-price').data('price', total)
+        $('#total-price').text(total * value)
+
 })

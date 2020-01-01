@@ -5,7 +5,7 @@
                 <p>04.____________________ Checkout</p>
                 <h2>Congratulations! Your fragrance is ready</h2>
             </div>
-            <div onclick="window.history.back()">
+            <div class="back">
                 Back
             </div>
         </div>
@@ -15,32 +15,26 @@
                 <div>
                     <h4>Select Size</h4>
                     <div class="cp-sizes">
-                        <input type="radio" name="bottle-size" class="hidden" id="check1"/>
-                        <label for="check1">
-                            30 ml
-                        </label>
-                        <input type="radio" name="bottle-size" class="hidden" id="check2"/>
-                        <label for="check2">
-                            60 ml
-                        </label>
-                        <input type="radio" name="bottle-size" class="hidden" id="check3"/>
-                        <label for="check3">
-                            90 ml
-                        </label>
+                        {{range .Sizes}}
+                            <input type="radio" name="bottle-size" class="hidden sizes" data-price="{{.Price}}" id="check-{{.Model.ID}}"/>
+                            <label for="check-{{.Model.ID}}">
+                                {{.Size}}
+                            </label>
+                        {{end}}
                     </div>
                 </div>
                 <div>
                     <h4>Select Quantity</h4>
                     <div class="cp-number">
                         <button class="myos-btn" id="minus">-</button>
-                        <input type="text" name="amount" readonly id="amount" value="0"/>
+                        <input type="text" name="amount" readonly id="amount" value="1"/>
                         <button class="myos-btn" id="plus">+</button>
                     </div>
                 </div>
 
                 <div>
                     <h4>Price</h4>
-                    <h3>${{.Price}}</h3>
+                    <h3>$ <span id="total-price" data-price="{{.Price}}" data-single="{{.Price}}"> {{.Price}}</span></h3>
                 </div>
             </div>
         </div>

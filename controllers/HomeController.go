@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"fmt"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/ichtrojan/fragrance/database"
 	"github.com/ichtrojan/fragrance/models"
-	"net/http"
 
 	"github.com/ichtrojan/fragrance/views"
 )
@@ -26,11 +28,16 @@ type BottleData struct {
 	Scent    string
 }
 
+type BottleSize struct {
+	models.BottleSize
+}
+
 type Fragrance struct {
 	Image    string
 	Category string
 	Scent    string
 	Bottle   string
+	Sizes    []models.BottleSize
 	Price    float64
 }
 
@@ -65,7 +72,6 @@ func Scent(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "scent")
 
 	db := database.Init()
-
 	var scents []models.Scent
 
 	var data []ScentsData
@@ -129,9 +135,11 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 
 	var fragraceScent models.Scent
 
+	// var bottleSize models.BottleSize
+
 	db := database.Init()
 
-	query := db.Where("slug = ?", bottle).First(&fragrance)
+	query := db.Where("slug = ?", bottle).Preload("BottleSizes").First(&fragrance)
 
 	query = db.Where("slug = ?", scent).First(&fragraceScent)
 
@@ -142,9 +150,10 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 		Category: category,
 		Scent:    scent,
 		Bottle:   bottle,
+		Sizes:    fragrance.BottleSizes,
 		Price:    fragraceScent.Price,
 	}
-
+	fmt.Printf("%+v\n", data)
 	must(view.Render(w, data))
 }
 

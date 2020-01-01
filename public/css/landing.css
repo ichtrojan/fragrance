@@ -24,6 +24,24 @@ h4 {
   padding-top: 100px;
   width: 100%;
 }
+.overlay input{
+  height: 50px;
+  border-radius: 0px;
+  border: 1px solid #000000;
+  background: transparent;
+}
+.overlay input:focus{
+  background: transparent;
+
+}
+.overlay button{
+  height: 50px;
+  border-radius: 0px;
+  width: 60%;
+}
+.overlay h2{
+  font-size: 72px !important;
+}
 .title {
   font-size: 18px;
   font-weight: bold;
@@ -388,6 +406,9 @@ h4 {
 .cp-sidebar-content img{
     width: 100%;
     object-fit: cover;
+}
+.back{
+  cursor: pointer;
 }
 /* end checkout */
 /* media queries */
