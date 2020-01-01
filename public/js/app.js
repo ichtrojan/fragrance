@@ -99,3 +99,8 @@ $('input:radio.sizes').change(function (e) {
 $('#perfume').imgcolr(function(img, color){
     $('.cp-sidebar').css('background', `linear-gradient(270deg,${color} 70%,#ffffff 87.5%)`)
 })
+
+$(document).ready(function(){
+  $('.sizes:last-of-type').attr('checked', true)
+  $('input:radio.sizes').trigger('change')
+})

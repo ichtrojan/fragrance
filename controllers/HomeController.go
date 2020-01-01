@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -153,7 +152,7 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 		Sizes:    fragrance.BottleSizes,
 		Price:    fragraceScent.Price,
 	}
-	fmt.Printf("%+v\n", data)
+	// fmt.Printf("%+v\n", data)
 	must(view.Render(w, data))
 }
 
