@@ -95,3 +95,7 @@ $('input:radio.sizes').change(function (e) {
         $('#total-price').text(total * value)
 
 })
+
+$('#perfume').imgcolr(function(img, color){
+    $('.cp-sidebar').css('background', `linear-gradient(270deg,${color} 70%,#ffffff 87.5%)`)
+})
