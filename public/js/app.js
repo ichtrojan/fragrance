@@ -65,7 +65,7 @@ $('#minus').click(function (e) {
 $('#plus').click(function (e) {
     e.preventDefault()
     if ($('input:radio.sizes:checked').val() == null) {
-        alert('select a size first')
+        swal("Alert", "Select a size first!", "error");
         return
     }
     let value = $('#amount').val()
@@ -100,7 +100,3 @@ $('#perfume').imgcolr(function(img, color){
     $('.cp-sidebar').css('background', `linear-gradient(270deg,${color} 70%,#ffffff 87.5%)`)
 })
 
-$(document).ready(function(){
-  $('.sizes:last-of-type').attr('checked', true)
-  $('input:radio.sizes').trigger('change')
-})
