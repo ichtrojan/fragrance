@@ -16,4 +16,11 @@
         </div>
     </div>
 </section>
-{{ end }}}
+
+{{if .Message}}
+    <script>
+        alert({{.Message}})
+    </script>
+{{end}}
+
+{{ end }}

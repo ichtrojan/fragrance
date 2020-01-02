@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"golang.org/x/crypto/bcrypt"
@@ -21,8 +20,6 @@ type Credentials struct {
 }
 
 func LoginUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Content-Type", "application/json")
-
 	creds := Credentials{
 		Email:    r.FormValue("email"),
 		Password: r.FormValue("password"),
@@ -37,18 +34,23 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 	defer query.Close()
 
 	if admin.Email == "" {
-		_ = json.NewEncoder(w).Encode(Response{Message: "user not found"})
+		data := Response{Message: "user not found"}
+		view = views.NewView("app", "signin")
+		must(view.Render(w, data))
 		return
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(creds.Password)); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		_ = json.NewEncoder(w).Encode(Response{Message: "password not valid"})
+		data := Response{Message: "password not valid"}
+		view = views.NewView("app", "signin")
+		must(view.Render(w, data))
 		return
 	}
 
-	_ = json.NewEncoder(w).Encode(Response{Message: "login successful"})
-
+	data := Response{Message: "login successful"}
+	view = views.NewView("app", "signin")
+	must(view.Render(w, data))
 	return
 }
 
