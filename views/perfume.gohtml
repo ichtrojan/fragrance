@@ -12,12 +12,12 @@
 
         <div class="container pp-grid">
             {{range .}}
-            <div class="sp-grid-content">
-                <a href="/{{.Category}}/{{.Scent}}/{{.Slug}}/checkout">
-                    <img src="{{.Image}}"/>
-                    <button class="myos-btn-alternate">Choose bottle</button>
-                </a>
-            </div>
+                <div class="sp-grid-content">
+                    <a href="/{{.Category}}/{{.Scent}}/{{.Slug}}/checkout">
+                        <img src="{{.Image}}"/>
+                        <button class="myos-btn-alternate">Choose bottle</button>
+                    </a>
+                </div>
             {{end}}
         </div>
     </section>

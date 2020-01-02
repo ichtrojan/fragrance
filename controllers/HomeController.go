@@ -6,7 +6,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/ichtrojan/fragrance/database"
 	"github.com/ichtrojan/fragrance/models"
-
 	"github.com/ichtrojan/fragrance/views"
 )
 
@@ -134,8 +133,6 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 
 	var fragraceScent models.Scent
 
-	// var bottleSize models.BottleSize
-
 	db := database.Init()
 
 	query := db.Where("slug = ?", bottle).Preload("BottleSizes").First(&fragrance)
@@ -152,7 +149,7 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 		Sizes:    fragrance.BottleSizes,
 		Price:    fragraceScent.Price,
 	}
-	// fmt.Printf("%+v\n", data)
+
 	must(view.Render(w, data))
 }
 
