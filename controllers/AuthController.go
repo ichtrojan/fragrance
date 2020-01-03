@@ -86,11 +86,9 @@ func GetSession(w http.ResponseWriter, r *http.Request) (id uint) {
 		if err = cookieHandler.Decode("gofrag", cookie.Value, &cookieValue); err == nil {
 			id = cookieValue["id"]
 			return id
-		} else {
-			w.WriteHeader(http.StatusUnauthorized)
-			http.Redirect(w, r, "login", 302)
 		}
 	}
 
+	http.Redirect(w, r, "login", 302)
 	return
 }
