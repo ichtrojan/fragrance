@@ -153,6 +153,28 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 	must(view.Render(w, data))
 }
 
+func Dashboard(w http.ResponseWriter, r *http.Request) {
+	view := views.NewView("app", "testauth")
+
+	adminId := GetSession(w, r)
+
+	var admin models.Admin
+
+	db := database.Init()
+
+	query := db.Where("id = ?", adminId).First(&admin)
+
+	defer query.Close()
+
+	type User struct {
+		Name string
+	}
+
+	var data = User{Name: admin.Name}
+
+	must(view.Render(w, data))
+}
+
 func must(err error) {
 	if err != nil {
 		panic(err)
