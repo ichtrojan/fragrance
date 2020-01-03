@@ -1,14 +1,18 @@
 package controllers
 
 import (
-	"net/http"
-
+	"github.com/gorilla/securecookie"
 	"golang.org/x/crypto/bcrypt"
+	"net/http"
 
 	"github.com/ichtrojan/fragrance/database"
 	"github.com/ichtrojan/fragrance/models"
 	"github.com/ichtrojan/fragrance/views"
 )
+
+var cookieHandler = securecookie.New(
+	securecookie.GenerateRandomKey(64),
+	securecookie.GenerateRandomKey(32))
 
 type Response struct {
 	Message string
@@ -48,13 +52,45 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := Response{Message: "login successful"}
-	view = views.NewView("app", "signin")
-	must(view.Render(w, data))
-	return
+	setSession(w, admin.ID)
+
+	http.Redirect(w, r, "dashboard", 302)
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "signin")
 	must(view.Render(w, nil))
+}
+
+func setSession(w http.ResponseWriter, userId uint) {
+	value := map[string]uint{
+		"id": userId,
+	}
+
+	if encoded, err := cookieHandler.Encode("gofrag", value); err == nil {
+		cookie := &http.Cookie{
+			Name:   "gofrag",
+			Value:  encoded,
+			Path:   "/",
+			MaxAge: 3600,
+		}
+
+		http.SetCookie(w, cookie)
+	}
+}
+
+func GetSession(w http.ResponseWriter, r *http.Request) (id uint) {
+	if cookie, err := r.Cookie("gofrag"); err == nil {
+		cookieValue := make(map[string]uint)
+
+		if err = cookieHandler.Decode("gofrag", cookie.Value, &cookieValue); err == nil {
+			id = cookieValue["id"]
+			return id
+		} else {
+			w.WriteHeader(http.StatusUnauthorized)
+			http.Redirect(w, r, "login", 302)
+		}
+	}
+
+	return
 }
