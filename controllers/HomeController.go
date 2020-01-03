@@ -70,6 +70,7 @@ func Scent(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "scent")
 
 	db := database.Init()
+
 	var scents []models.Scent
 
 	var data []ScentsData
