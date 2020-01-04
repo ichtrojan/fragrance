@@ -3,6 +3,9 @@
     <div class="container v-flex">
         <div class="col-md-5 hp-main-description">
             <h1>Welcome {{.Name}}</h1>
+            <form action="/logout" method="post">
+                <button type="submit">Logout</button>
+            </form>
         </div>
     </div>
 </section>
