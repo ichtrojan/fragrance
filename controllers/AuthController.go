@@ -92,3 +92,16 @@ func GetSession(w http.ResponseWriter, r *http.Request) (id uint) {
 	http.Redirect(w, r, "login", 302)
 	return
 }
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	cookie := &http.Cookie{
+		Name:   "gofrag",
+		Value:  "",
+		Path:   "/",
+		MaxAge: -1,
+	}
+
+	http.SetCookie(w, cookie)
+
+	http.Redirect(w, r, "login", 302)
+}
