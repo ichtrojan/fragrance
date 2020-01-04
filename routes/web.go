@@ -15,6 +15,7 @@ func Init() *mux.Router {
 	route.NotFoundHandler = http.HandlerFunc(notFound)
 
 	route.HandleFunc("/", controllers.Home)
+	route.HandleFunc("/logout", controllers.Logout).Methods("POST")
 	route.HandleFunc("/dashboard", controllers.Dashboard)
 	route.HandleFunc("/categories", controllers.Category)
 	route.HandleFunc("/login", controllers.Signin).Methods("GET")
