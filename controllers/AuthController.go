@@ -23,7 +23,16 @@ type Credentials struct {
 	Password string
 }
 
-func LoginUser(w http.ResponseWriter, r *http.Request) {
+func Login(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		login(w, r)
+	case "POST":
+		postlogin(w, r)
+	}
+}
+
+func postlogin(w http.ResponseWriter, r *http.Request) {
 	creds := Credentials{
 		Email:    r.FormValue("email"),
 		Password: r.FormValue("password"),
@@ -57,7 +66,7 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "dashboard", 302)
 }
 
-func Signin(w http.ResponseWriter, r *http.Request) {
+func login(w http.ResponseWriter, r *http.Request) {
 	view = views.NewView("app", "signin")
 	must(view.Render(w, nil))
 }
