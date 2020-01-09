@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"github.com/ichtrojan/thoth"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +13,10 @@ import (
 )
 
 func main() {
+	logger, _ := thoth.Init("log")
+
 	if err := godotenv.Load(); err != nil {
+		logger.Log(errors.New("no .env file found"))
 		log.Fatal("No .env file found")
 	}
 
@@ -28,10 +33,12 @@ func main() {
 	port, exist := os.LookupEnv("PORT")
 
 	if !exist {
+		logger.Log(errors.New("PORT not set in .env"))
 		log.Fatal("PORT not set in .env")
 	}
 
 	if err := http.ListenAndServe(":"+port, routes.Init()); err != nil {
+		logger.Log(err)
 		log.Fatal(err)
 	}
 }
