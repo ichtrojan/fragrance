@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/ichtrojan/thoth"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,9 +30,12 @@ func Init() *mux.Router {
 func notFound(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 
+	logger, _ := thoth.Init("log")
+
 	view, err := template.ParseFiles("views/errors/404.html")
 
 	if err != nil {
+		logger.Log(err)
 		log.Fatal(err)
 	}
 
