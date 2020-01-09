@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/ichtrojan/thoth"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -177,7 +178,10 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 }
 
 func must(err error) {
+	var logger, _ = thoth.Init("log")
+
 	if err != nil {
+		logger.Log(err)
 		panic(err)
 	}
 }
