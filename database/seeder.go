@@ -1,6 +1,7 @@
 package database
 
 import (
+	"github.com/ichtrojan/thoth"
 	"log"
 
 	"golang.org/x/crypto/bcrypt"
@@ -200,9 +201,12 @@ func SeedBottle() {
 }
 
 func hashAndSalt(password []byte) string {
+	logger, _ := thoth.Init("log")
+
 	hash, err := bcrypt.GenerateFromPassword(password, bcrypt.MinCost)
 
 	if err != nil {
+		logger.Log(err)
 		log.Println(err)
 	}
 

@@ -1,7 +1,9 @@
 package database
 
 import (
+	"errors"
 	"fmt"
+	"github.com/ichtrojan/thoth"
 	"log"
 	"os"
 
@@ -10,27 +12,33 @@ import (
 )
 
 func Init() *gorm.DB {
+	logger, _ := thoth.Init("log")
+
 	user, exist := os.LookupEnv("DB_USER")
 
 	if !exist {
+		logger.Log(errors.New("DB_USER not set in .env"))
 		log.Fatal("DB_USER not set in .env")
 	}
 
 	pass, exist := os.LookupEnv("DB_PASS")
 
 	if !exist {
+		logger.Log(errors.New("DB_PASS not set in .env"))
 		log.Fatal("DB_PASS not set in .env")
 	}
 
 	host, exist := os.LookupEnv("DB_HOST")
 
 	if !exist {
+		logger.Log(errors.New("DB_HOST not set in .env"))
 		log.Fatal("DB_HOST not set in .env")
 	}
 
 	name, exist := os.LookupEnv("DB_NAME")
 
 	if !exist {
+		logger.Log(errors.New("DB_NAME not set in .en"))
 		log.Fatal("DB_NAME not set in .env")
 	}
 
@@ -39,6 +47,7 @@ func Init() *gorm.DB {
 	db, err := gorm.Open("mysql", credentials)
 
 	if err != nil {
+		logger.Log(err)
 		log.Fatal(err)
 	}
 
