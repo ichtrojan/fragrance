@@ -1,55 +1,85 @@
 {{define "yield"}}
-    <section class="fp-main">
-        <div class="fp-heading text-dark container">
-            <div class="fp-heading-title">
-                <p>04.____________________ Checkout</p>
-                <h2>Congratulations! Your fragrance is ready</h2>
+<section class="fp-main">
+    <div class="fp-heading text-dark container">
+        <div class="fp-heading-title">
+            <p>04.____________________ Checkout</p>
+            <h2>Congratulations! Your fragrance is ready</h2>
+        </div>
+        <div class="back">
+            Back
+        </div>
+    </div>
+
+    <div class="container">
+        <div class=" cp-setting">
+            <div>
+                <h4>Select Size</h4>
+                <div class="cp-sizes">
+                    {{range .Sizes}}
+                        <input type="radio" name="bottle-size" class="hidden sizes" data-price="{{.Price}}"
+                               id="check-{{.Model.ID}}"/>
+                        <label for="check-{{.Model.ID}}">
+                            {{.Size}}
+                        </label>
+                    {{end}}
+                </div>
             </div>
-            <div class="back">
-                Back
+            <div>
+                <h4>Select Quantity</h4>
+                <div class="cp-number">
+                    <button class="myos-btn" id="minus">-</button>
+                    <input type="text" name="amount" readonly id="amount" value="1"/>
+                    <button class="myos-btn" id="plus">+</button>
+                </div>
+            </div>
+
+            <div>
+                <h4>Price</h4>
+                <h3>$ <span id="total-price" data-price="{{.Price}}" data-single="{{.Price}}"> 0.00</span></h3>
             </div>
         </div>
+    </div>
 
+    <div class="cp-sidebar">
         <div class="container">
-            <div class=" cp-setting">
-                <div>
-                    <h4>Select Size</h4>
-                    <div class="cp-sizes">
-                        {{range .Sizes}}
-                            <input type="radio" name="bottle-size" class="hidden sizes" data-price="{{.Price}}" id="check-{{.Model.ID}}"/>
-                            <label for="check-{{.Model.ID}}">
-                                {{.Size}}
-                            </label>
-                        {{end}}
-                    </div>
-                </div>
-                <div>
-                    <h4>Select Quantity</h4>
-                    <div class="cp-number">
-                        <button class="myos-btn" id="minus">-</button>
-                        <input type="text" name="amount" readonly id="amount" value="1"/>
-                        <button class="myos-btn" id="plus">+</button>
-                    </div>
-                </div>
-
-                <div>
-                    <h4>Price</h4>
-                    <h3>$ <span id="total-price" data-price="{{.Price}}" data-single="{{.Price}}"> 0.00</span></h3>
-                </div>
+            <div class="cp-sidebar-content">
+                <img id="perfume" src="{{.Image}}" alt=""/>
+                <p>
+                    Your new personalized fragrance has a {{.Category}} scent with notes of
+                    {{.Scent}} scents packaged in a {{.Bottle}} bottle.
+                </p>
+                <button class="myos-btn-alternate" onclick="payWithPaystack()">Buy Now</button>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="cp-sidebar">
-            <div class="container">
-                <div class="cp-sidebar-content">
-                    <img id="perfume" src="{{.Image}}" alt=""/>
-                    <p>
-                        Your new personalized fragrance has a {{.Category}} scent with notes of
-                        {{.Scent}} scents packaged in a {{.Bottle}} bottle.
-                    </p>
-                    <button class="myos-btn-alternate">Buy Now</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<script src="https://js.paystack.co/v1/paystack.js"></script>
+<script>
+    function payWithPaystack(){
+        var handler = PaystackPop.setup({
+            key: 'pk_test_86d32aa1nV4l1da7120ce530f0b221c3cb97cbcc',
+            email: 'customer@email.com',
+            amount: 10000,
+            currency: "NGN",
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                        value: "+2348012345678"
+                    }
+                ]
+            },
+            callback: function(response){
+                alert('success. transaction ref is ' + response.reference);
+            },
+            onClose: function(){
+                alert('window closed');
+            }
+        });
+        handler.openIframe();
+    }
+</script>
 {{ end }}}
