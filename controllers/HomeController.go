@@ -2,7 +2,10 @@ package controllers
 
 import (
 	"github.com/ichtrojan/thoth"
+	"html/template"
+	"log"
 	"net/http"
+	"reflect"
 
 	"github.com/gorilla/mux"
 	"github.com/ichtrojan/fragrance/database"
@@ -72,11 +75,28 @@ func Scent(w http.ResponseWriter, r *http.Request) {
 
 	db := database.Init()
 
+	var categories []models.Category
+
+	query := db.Find(&categories)
+
+	defer query.Close()
+
+	var slugs []string
+
+	for _, category := range categories {
+		slugs = append(slugs, category.Slug)
+	}
+
+	if !slugExists(slugs, category) {
+		notFound(w, r)
+		return
+	}
+
 	var scents []models.Scent
 
 	var data []ScentsData
 
-	query := db.Find(&scents)
+	query = db.Find(&scents)
 
 	defer query.Close()
 
@@ -101,11 +121,28 @@ func Perfume(w http.ResponseWriter, r *http.Request) {
 
 	db := database.Init()
 
+	var scents []models.Scent
+
+	query := db.Find(&scents)
+
+	defer query.Close()
+
+	var slugs []string
+
+	for _, scent := range scents {
+		slugs = append(slugs, scent.Slug)
+	}
+
+	if !slugExists(slugs, scent) {
+		notFound(w, r)
+		return
+	}
+
 	var data []BottleData
 
 	var bottles []models.Bottle
 
-	query := db.Find(&bottles)
+	query = db.Find(&bottles)
 
 	defer query.Close()
 
@@ -137,7 +174,24 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 
 	db := database.Init()
 
-	query := db.Where("slug = ?", bottle).Preload("BottleSizes").First(&fragrance)
+	var bottles []models.Bottle
+
+	query := db.Find(&bottles)
+
+	defer query.Close()
+
+	var slugs []string
+
+	for _, bottle := range bottles {
+		slugs = append(slugs, bottle.Slug)
+	}
+
+	if !slugExists(slugs, bottle) {
+		notFound(w, r)
+		return
+	}
+
+	query = db.Where("slug = ?", bottle).Preload("BottleSizes").First(&fragrance)
 
 	query = db.Where("slug = ?", scent).First(&fragraceScent)
 
@@ -184,4 +238,35 @@ func must(err error) {
 		logger.Log(err)
 		panic(err)
 	}
+}
+
+func slugExists(slice interface{}, item interface{}) bool {
+	s := reflect.ValueOf(slice)
+
+	if s.Kind() != reflect.Slice {
+		panic("Invalid data-type")
+	}
+
+	for i := 0; i < s.Len(); i++ {
+		if s.Index(i).Interface() == item {
+			return true
+		}
+	}
+
+	return false
+}
+
+func notFound(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+
+	logger, _ := thoth.Init("log")
+
+	view, err := template.ParseFiles("views/errors/404.html")
+
+	if err != nil {
+		logger.Log(err)
+		log.Fatal(err)
+	}
+
+	_ = view.Execute(w, nil)
 }
