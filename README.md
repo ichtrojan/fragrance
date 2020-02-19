@@ -1,6 +1,6 @@
 # Fragrance
 
-<img src="https://res.cloudinary.com/ichtrojan/image/upload/v1582069174/Screenshot_2020-02-18_at_00.59.01_hx9giw.png"/>
+![hero](https://res.cloudinary.com/ichtrojan/image/upload/c_scale,w_1233/v1582069174/Screenshot_2020-02-18_at_00.59.01_hx9giw.png)
 
 ## Introduction
 
