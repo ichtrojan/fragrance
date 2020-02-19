@@ -9,7 +9,7 @@ This is a test project to demonstrate template rendering with Go.
 ## Requirements
 
 * [Go](https://golang.org) -  v1.11 above
-* [MySQL](https://mysql.com) - v5.7 minimum
+* [MySQL](https://mysql.com) - v5.7 above
 
 ## Installation
 
@@ -67,10 +67,14 @@ This is a test project to demonstrate template rendering with Go.
 |   Dashboard Login	🔐|   We wanted to build a Dashboard but we didn't have the time to do so; so we made a functional Auth system	|   `/login`	|  ![login](https://res.cloudinary.com/ichtrojan/image/upload/v1582072615/Screenshot_2020-02-19_at_01.34.23_k3qauq.png) 	|
 |   Dashboard Home 🏡	|   The dashboard home is the page that comes up immediately you login; the only function available is the logout functionality... I wish we had time to do more 🤕	|  `/dashboard` 	|  ![dahboard](https://res.cloudinary.com/ichtrojan/image/upload/v1582072629/Screenshot_2020-02-19_at_01.34.35_be1wpj.png) 	|
 
+## Performance
+
+![Performance](https://res.cloudinary.com/ichtrojan/image/upload/v1582075938/Screenshot_2020-02-19_at_02.31.30_euwlcv.png)
+
 ## Contributors
 
 |   Contributor Name	| Role  	|  Tool 	| Language(s)  	|
 |---	|---	|---	|---	|
-|   [Ifeoluwasimi Olusola](https://twitter.com/o_ifeoluwasimi)	|  Design 	|   Adobe XD	|   nil	|
-|   [Muheez Jimoh](https://twitter.com/Kng_maaj)	|  Developer 	|   VS Code	|  HTML, CSS, JavaScript & Go 	|
-|  [Michael Trojan Okoh](https://twitter.com/ichtrojan) 	|   Developer	|   Goland	|   HTML & Go	|
+|   [Ifeoluwasimi Olusola](https://twitter.com/o_ifeoluwasimi)	|  Design 	|   [Adobe XD](https://www.adobe.com/products/xd.html)	|   ---	|
+|   [Muheez Jimoh](https://twitter.com/Kng_maaj)	|  Developer 	|   [VSCode](https://code.visualstudio.com)	|  HTML, CSS, JavaScript & Go 	|
+|  [Michael Trojan Okoh](https://twitter.com/ichtrojan) 	|   Developer	|   [Goland](https://www.jetbrains.com/go/)	|   HTML, CSS & Go	|
