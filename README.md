@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a test project to demonstrate template rendering with Go.
+This is a Fragrance showcase built with Go. We hope this becomes an inspiration to you; feel free to use components of this codebase in your future projects. We built this to make ourselves happy, We hope you're happy looking at this project right now and you're making other people happy. ❤️
 
 ## Requirements
 
@@ -69,12 +69,12 @@ This is a test project to demonstrate template rendering with Go.
 
 ## Performance
 
-![Performance](https://res.cloudinary.com/ichtrojan/image/upload/v1582075938/Screenshot_2020-02-19_at_02.31.30_euwlcv.png)
+![Performance](https://res.cloudinary.com/ichtrojan/image/upload/v1582076107/Screenshot_2020-02-19_at_02.34.44_ch4bpu.png)
 
 ## Contributors
 
 |   Contributor Name	| Role  	|  Tool 	| Language(s)  	|
 |---	|---	|---	|---	|
-|   [Ifeoluwasimi Olusola](https://twitter.com/o_ifeoluwasimi)	|  Design 	|   [Adobe XD](https://www.adobe.com/products/xd.html)	|   ---	|
+|   [Ifeoluwasimi Olusola](https://twitter.com/o_ifeoluwasimi)	|  Designer 	|   [Adobe XD](https://www.adobe.com/products/xd.html)	|   ---	|
 |   [Muheez Jimoh](https://twitter.com/Kng_maaj)	|  Developer 	|   [VSCode](https://code.visualstudio.com)	|  HTML, CSS, JavaScript & Go 	|
 |  [Michael Trojan Okoh](https://twitter.com/ichtrojan) 	|   Developer	|   [Goland](https://www.jetbrains.com/go/)	|   HTML, CSS & Go	|
