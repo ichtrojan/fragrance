@@ -38,7 +38,7 @@ func Init() *gorm.DB {
 	name, exist := os.LookupEnv("DB_NAME")
 
 	if !exist {
-		logger.Log(errors.New("DB_NAME not set in .en"))
+		logger.Log(errors.New("DB_NAME not set in .env"))
 		log.Fatal("DB_NAME not set in .env")
 	}
 
